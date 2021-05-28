@@ -1,0 +1,3 @@
+Resultado: FH
+Operaciones: 2
+Tiempo: 435 microsegundos
