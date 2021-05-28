@@ -242,19 +242,18 @@ int main() {
   Graph g(15);
   g.AddEdge(0, 8);
   g.AddEdge(8, 12);
-  g.AddEdge(12, 13);
   g.AddEdge(12, 14);
+  g.AddEdge(12, 13);
   g.AddEdge(8, 9);
-  g.AddEdge(9, 10);
   g.AddEdge(9, 11);
-
+  g.AddEdge(9, 10);
   g.AddEdge(0, 1);
   g.AddEdge(1, 5);
-  g.AddEdge(5, 6);
   g.AddEdge(5, 7);
+  g.AddEdge(5, 6);
   g.AddEdge(1, 2);
-  g.AddEdge(2, 3);
   g.AddEdge(2, 4);
+  g.AddEdge(2, 3);
  
   auto start = high_resolution_clock::now();
 
