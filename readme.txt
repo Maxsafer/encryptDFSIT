@@ -1,4 +1,4 @@
-Este programa recibe a través de redireccionamiento un input de x numeros (del 1 al 6) los cuales serán "encriptados" a través de un algoritmo DFS recursivo. Sin saber la estructura del árbol, no sería posible entender la conversión.
+Este programa recibe a través de redireccionamiento un input de x numeros (del 1 al 6) los cuales serán "encriptados" a través de un algoritmo DFS iterativo. Sin saber la estructura del árbol, no sería posible entender la conversión.
 
 Creado por A01027541 Maximiliano Sapién y A01027446 Karen Morgado
 

@@ -1,6 +1,13 @@
-// An Iterative C++ program to do DFS traversal from
-// a given source vertex. DFS(int s) traverses vertices
-// reachable from s.
+/*
+Este programa recibe a través de redireccionamiento un input de x numeros (del 1 al 6) los cuales serán "encriptados" a través de un algoritmo DFS iterativo. Sin saber la estructura del árbol, no sería posible entender la conversión.
+
+Creado por A01027541 Maximiliano Sapién y A01027446 Karen Morgado
+
+5/21/21
+
+ITESM CSF
+*/
+
 #include <iostream>
 #include <bits/stdc++.h>
 #include <string> 
@@ -8,13 +15,12 @@
 using namespace std;
 using namespace std::chrono;
  
-// This class represents a directed graph using adjacency
-// list representation
-class Graph
-{
-    int V;    // No. of vertices
-    list<int> *adj;    // adjacency lists
+class Graph{
+  int V;    // No. of vertices
+  list<int> *adj;    // adjacency lists
+
 public:
+  //Variables
   int contador = 0;
   int operaciones = 0;
   string resultado;
@@ -30,54 +36,47 @@ public:
   void ResOperaciones();
 };
  
-Graph::Graph(int V)
-{
+Graph::Graph(int V){
     this->V = V;
     adj = new list<int>[V];
 }
  
-void Graph::AddEdge(int v, int w)
-{
+void Graph::AddEdge(int v, int w){
     adj[v].push_back(w); // Add w to v’s list.
 }
  
-// prints all not yet visited vertices reachable from s
-void Graph::DFS(int s, string num)
-{
-    // Initially mark all verices as not visited
-    vector<bool> visited(V, false);
+//DFS ALG
+void Graph::DFS(int s, string num){
+
+  vector<bool> visited(V, false); //Resetting the tree
+
+  stack<int> stack; // Create a stack for DFS
+
+  // Push the current source node.
+  stack.push(s);
  
-    // Create a stack for DFS
-    stack<int> stack;
+  while (!stack.empty()){
+    // Pop a vertex from stack
+    s = stack.top();
+    stack.pop();
  
-    // Push the current source node.
-    stack.push(s);
- 
-    while (!stack.empty())
-    {
-        // Pop a vertex from stack and print it
-        s = stack.top();
-        stack.pop();
- 
-        // Stack may contain same vertex twice. So
-        // we need to print the popped item only
-        // if it is not visited.
-        if (!visited[s])
-        {
-            //cout << s << " ";
-            visited[s] = true;
-            Encrypt(s, num);
-        }
- 
-        // Get all adjacent vertices of the popped vertex s
-        // If a adjacent has not been visited, then push it
-        // to the stack.
-        for (auto i = adj[s].begin(); i != adj[s].end(); ++i){
-          if (!visited[*i]){
-            stack.push(*i);
-          }         
-        }
+    if (!visited[s]){
+      visited[s] = true;
+
+      //Método encriptar
+      Encrypt(s, num);
     }
+ 
+    // Get all adjacent vertices of the popped vertex s
+    // If a adjacent has not been visited, then push it
+    // to the stack.
+    for (auto i = adj[s].begin(); i != adj[s].end(); ++i){
+      operaciones++;
+      if (!visited[*i]){
+        stack.push(*i);
+      }         
+    }
+  }
 }
 
 void Graph::Encrypt(int v, string num){
@@ -132,7 +131,7 @@ void Graph::Encrypt(int v, string num){
 
     case 6:
       if(realnum == 1){
-        resultado.append("F"); contador++; operaciones++;
+        resultado.append("G"); contador++; operaciones++;
       }
       return;
 
@@ -191,7 +190,7 @@ void Graph::ResOperaciones(){
   cout<<"Operaciones: "<<operaciones<<endl;
 }
  
-// Driver program to test methods of graph class
+// Driver code
 int main() {
 
   //input system
@@ -238,21 +237,24 @@ int main() {
   //contadores
   int veces = 0;
   veces = num.length()/3 + (num.length())%3; //definimos las veces que se ejecuta el método
-  Graph g(15); // Total 5 vertices in graph
+
+  //tree
+  Graph g(15);
   g.AddEdge(0, 8);
-  g.AddEdge(0, 1);
-  g.AddEdge(8, 9);
-  g.AddEdge(9, 10);
-  g.AddEdge(9, 11);
   g.AddEdge(8, 12);
   g.AddEdge(12, 13);
   g.AddEdge(12, 14);
-  g.AddEdge(1, 2);
-  g.AddEdge(2, 3);
-  g.AddEdge(2, 4);
+  g.AddEdge(8, 9);
+  g.AddEdge(9, 10);
+  g.AddEdge(9, 11);
+
+  g.AddEdge(0, 1);
   g.AddEdge(1, 5);
   g.AddEdge(5, 6);
   g.AddEdge(5, 7);
+  g.AddEdge(1, 2);
+  g.AddEdge(2, 3);
+  g.AddEdge(2, 4);
  
   auto start = high_resolution_clock::now();
 
@@ -265,8 +267,6 @@ int main() {
 
   g.ResOperaciones();
   cout <<"Tiempo: " << duration.count() << " microsegundos" << endl;
-  
-	return 0;
  
   return 0;
 }
